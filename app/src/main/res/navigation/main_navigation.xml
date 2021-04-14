@@ -20,5 +20,17 @@
         android:id="@+id/homeFragment"
         android:name="com.example.materialanimationexample.fragment.HomeFragment"
         android:label="fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/homeFragment"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.materialanimationexample.fragment.search.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>

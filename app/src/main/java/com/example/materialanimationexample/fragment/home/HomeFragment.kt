@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.materialanimationexample.MainViewModel
+import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.HomeFragmentLayoutBinding
 import com.example.materialanimationexample.fragment.home.HomeFragmentViewModel
 
@@ -35,6 +36,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.historyBtn.setOnClickListener(this)
         binding.searchBtn.setOnClickListener(this)
         binding.storageBtn.setOnClickListener(this)
+        activeBtn(binding.historyBtn)
     }
 
     override fun onDestroyView() {
@@ -48,16 +50,29 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 mainViewModel?.setOpenDrawerLayout(true)
             }
             binding.cleanBtn -> {
-
+               activeBtn(binding.cleanBtn)
             }
             binding.historyBtn -> {
-
+                activeBtn(binding.historyBtn)
             }
             binding.searchBtn -> {
+                goToSearchScreen()
             }
             binding.storageBtn -> {
+                activeBtn(binding.storageBtn)
             }
         }
+    }
+
+    private fun goToSearchScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+    }
+
+    private fun activeBtn(view: View) {
+        binding.historyBtn.isActivated = false
+        binding.cleanBtn.isActivated = false
+        binding.storageBtn.isActivated = false
+        view.isActivated = true
     }
 
 
