@@ -23,11 +23,11 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
             app:popUpTo="@id/homeFragment"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_fade_exit" />
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

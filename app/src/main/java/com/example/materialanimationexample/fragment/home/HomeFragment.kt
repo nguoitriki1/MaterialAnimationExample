@@ -1,42 +1,76 @@
 package com.example.materialanimationexample.fragment
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.materialanimationexample.MainViewModel
 import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.HomeFragmentLayoutBinding
 import com.example.materialanimationexample.fragment.home.HomeFragmentViewModel
+import com.example.materialanimationexample.utils.requestPermission
+
 
 class HomeFragment : Fragment(), View.OnClickListener {
     private var _binding: HomeFragmentLayoutBinding? = null
     private val binding get() = _binding!!
-    private var viewModel: HomeFragmentViewModel? = null
-    private var mainViewModel: MainViewModel? = null
+    private val viewModel: HomeFragmentViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (Build.VERSION.SDK_INT == 29) {
+                val data = result.data ?: return@registerForActivityResult
+                val uri = data.data ?: return@registerForActivityResult
+                requireActivity().contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                mainViewModel.setUriStorage(uri)
+            }
+        }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = HomeFragmentLayoutBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        mainViewModel?.setEnableDrawerLayout(true)
-        binding.settingBtn.setOnClickListener(this)
-        binding.cleanBtn.setOnClickListener(this)
-        binding.historyBtn.setOnClickListener(this)
-        binding.searchBtn.setOnClickListener(this)
-        binding.storageBtn.setOnClickListener(this)
+        mainViewModel.setEnableDrawerLayout(true)
+        setOnClickView()
         activeBtn(binding.historyBtn)
+        requireActivity().requestPermission(startForResult)
+    }
+
+    private fun setOnClickView() = with(binding) {
+        settingBtn.setOnClickListener(this@HomeFragment)
+        cleanBtn.setOnClickListener(this@HomeFragment)
+        historyBtn.setOnClickListener(this@HomeFragment)
+        searchBtn.setOnClickListener(this@HomeFragment)
+        storageBtn.setOnClickListener(this@HomeFragment)
+        storageBtn.setOnClickListener(this@HomeFragment)
+        storageBtn.setOnClickListener(this@HomeFragment)
+        imageBtn.setOnClickListener(this@HomeFragment)
+        videoBtn.setOnClickListener(this@HomeFragment)
+        documentBtn.setOnClickListener(this@HomeFragment)
+        musicBtn.setOnClickListener(this@HomeFragment)
+        apkBtn.setOnClickListener(this@HomeFragment)
+        downloadBtn.setOnClickListener(this@HomeFragment)
+        zipBtn.setOnClickListener(this@HomeFragment)
+        moreBtn.setOnClickListener(this@HomeFragment)
     }
 
     override fun onDestroyView() {
@@ -45,23 +79,55 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v) {
-            binding.settingBtn -> {
-                mainViewModel?.setOpenDrawerLayout(true)
+        when (v?.id) {
+            binding.settingBtn.id -> {
+                mainViewModel.setOpenDrawerLayout(true)
             }
-            binding.cleanBtn -> {
-               activeBtn(binding.cleanBtn)
+            binding.cleanBtn.id -> {
+                activeBtn(binding.cleanBtn)
             }
-            binding.historyBtn -> {
+            binding.historyBtn.id -> {
                 activeBtn(binding.historyBtn)
             }
-            binding.searchBtn -> {
+            binding.searchBtn.id -> {
                 goToSearchScreen()
             }
-            binding.storageBtn -> {
+            binding.storageBtn.id -> {
                 activeBtn(binding.storageBtn)
             }
+            binding.imageBtn.id -> {
+                openScreenImage()
+            }
+            binding.videoBtn.id -> {
+//                openScreen(ScreenTypeClick.VIDEO)
+            }
+            binding.documentBtn.id -> {
+                openScreenDocument()
+            }
+            binding.musicBtn.id -> {
+//                openScreen(ScreenTypeClick.MUSIC)
+            }
+            binding.apkBtn.id -> {
+//                openScreen(ScreenTypeClick.APK)
+            }
+            binding.downloadBtn.id -> {
+//                openScreen(ScreenTypeClick.DOWNLOAD)
+            }
+            binding.zipBtn.id -> {
+//                openScreen(ScreenTypeClick.ZIP)
+            }
+            binding.moreBtn.id -> {
+//                openScreen(ScreenTypeClick.MORE)
+            }
         }
+    }
+
+    private fun openScreenDocument() {
+
+    }
+
+    private fun openScreenImage() {
+
     }
 
     private fun goToSearchScreen() {

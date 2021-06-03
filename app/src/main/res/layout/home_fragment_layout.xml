@@ -100,7 +100,7 @@
                     android:elevation="4dp">
 
                     <View
-                        android:id="@+id/view6"
+                        android:id="@+id/image_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
@@ -109,42 +109,42 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/view13"
+                        app:layout_constraintBottom_toTopOf="@+id/apk_btn"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view7"
+                        app:layout_constraintEnd_toStartOf="@+id/video_btn"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/view7"
+                        android:id="@+id/video_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="8dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/view12"
+                        app:layout_constraintBottom_toTopOf="@+id/download_btn"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view8"
-                        app:layout_constraintStart_toEndOf="@+id/view6"
+                        app:layout_constraintEnd_toStartOf="@+id/document_btn"
+                        app:layout_constraintStart_toEndOf="@+id/image_btn"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/view8"
+                        android:id="@+id/document_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="8dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/view11"
+                        app:layout_constraintBottom_toTopOf="@+id/zip_btn"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view9"
-                        app:layout_constraintStart_toEndOf="@+id/view7"
+                        app:layout_constraintEnd_toStartOf="@+id/music_btn"
+                        app:layout_constraintStart_toEndOf="@+id/video_btn"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/view9"
+                        android:id="@+id/music_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="8dp"
@@ -153,14 +153,14 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/view10"
+                        app:layout_constraintBottom_toTopOf="@+id/more_btn"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/view8"
+                        app:layout_constraintStart_toEndOf="@+id/document_btn"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/view10"
+                        android:id="@+id/more_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginEnd="8dp"
@@ -171,11 +171,11 @@
                         app:layout_constraintBottom_toTopOf="@+id/guideline5"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/view11"
-                        app:layout_constraintTop_toBottomOf="@+id/view9" />
+                        app:layout_constraintStart_toEndOf="@+id/zip_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/music_btn" />
 
                     <View
-                        android:id="@+id/view11"
+                        android:id="@+id/zip_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:clickable="true"
@@ -183,22 +183,22 @@
                         android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/guideline5"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view10"
-                        app:layout_constraintStart_toEndOf="@+id/view12"
-                        app:layout_constraintTop_toBottomOf="@+id/view8" />
+                        app:layout_constraintEnd_toStartOf="@+id/more_btn"
+                        app:layout_constraintStart_toEndOf="@+id/download_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/document_btn" />
 
                     <View
-                        android:id="@+id/view12"
+                        android:id="@+id/download_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline5"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view11"
-                        app:layout_constraintStart_toEndOf="@+id/view13"
-                        app:layout_constraintTop_toBottomOf="@+id/view7" />
+                        app:layout_constraintEnd_toStartOf="@+id/zip_btn"
+                        app:layout_constraintStart_toEndOf="@+id/apk_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/video_btn" />
 
                     <View
-                        android:id="@+id/view13"
+                        android:id="@+id/apk_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
@@ -208,9 +208,9 @@
                         android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/guideline5"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toStartOf="@+id/view12"
+                        app:layout_constraintEnd_toStartOf="@+id/download_btn"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view6" />
+                        app:layout_constraintTop_toBottomOf="@+id/image_btn" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline5"
@@ -220,176 +220,200 @@
                         app:layout_constraintGuide_begin="200dp" />
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/img_icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="fitXY"
-                        app:layout_constraintEnd_toEndOf="@+id/view6"
-                        app:layout_constraintStart_toStartOf="@+id/view6"
-                        app:layout_constraintTop_toTopOf="@+id/view6"
+                        app:layout_constraintBottom_toTopOf="@+id/img_txt"
+                        app:layout_constraintEnd_toEndOf="@+id/image_btn"
+                        app:layout_constraintStart_toStartOf="@+id/image_btn"
+                        app:layout_constraintTop_toTopOf="@+id/image_btn"
+                        app:layout_constraintVertical_chainStyle="packed"
                         app:srcCompat="@drawable/file_image_icon" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/img_txt"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:text="@string/image"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view6"
-                        app:layout_constraintEnd_toEndOf="@+id/view6"
-                        app:layout_constraintStart_toStartOf="@+id/view6"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                        android:text="@string/image"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_btn"
+                        app:layout_constraintEnd_toEndOf="@+id/image_btn"
+                        app:layout_constraintStart_toStartOf="@+id/image_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/img_icon" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/video_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="fitXY"
-                        app:layout_constraintEnd_toEndOf="@+id/view7"
-                        app:layout_constraintStart_toEndOf="@+id/view6"
-                        app:layout_constraintTop_toTopOf="@+id/view7"
+                        app:layout_constraintBottom_toTopOf="@+id/video_txt"
+                        app:layout_constraintEnd_toEndOf="@+id/video_btn"
+                        app:layout_constraintStart_toEndOf="@+id/image_btn"
+                        app:layout_constraintTop_toTopOf="@+id/video_btn"
+                        app:layout_constraintVertical_chainStyle="packed"
                         app:srcCompat="@drawable/file_video_icon" />
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/video_txt"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:text="@string/video"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view7"
-                        app:layout_constraintEnd_toEndOf="@+id/view7"
-                        app:layout_constraintStart_toEndOf="@+id/view6"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                        android:text="@string/video"
+                        app:layout_constraintBottom_toBottomOf="@+id/video_btn"
+                        app:layout_constraintEnd_toEndOf="@+id/video_btn"
+                        app:layout_constraintStart_toEndOf="@+id/image_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/video_img" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/document_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@+id/view8"
-                        app:layout_constraintStart_toEndOf="@+id/view7"
-                        app:layout_constraintTop_toTopOf="@+id/view8"
+                        app:layout_constraintBottom_toTopOf="@+id/document_txt"
+                        app:layout_constraintEnd_toEndOf="@+id/document_btn"
+                        app:layout_constraintStart_toEndOf="@+id/video_btn"
+                        app:layout_constraintTop_toTopOf="@+id/document_btn"
+                        app:layout_constraintVertical_chainStyle="packed"
                         app:srcCompat="@drawable/file_document_icon" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/document_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
                         android:lines="2"
                         android:text="@string/document"
                         android:textSize="14dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/view8"
-                        app:layout_constraintEnd_toEndOf="@+id/view8"
-                        app:layout_constraintStart_toEndOf="@+id/view7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintBottom_toBottomOf="@+id/document_btn"
+                        app:layout_constraintEnd_toEndOf="@+id/document_btn"
+                        app:layout_constraintStart_toEndOf="@+id/video_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/document_img" />
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/music_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@+id/view9"
-                        app:layout_constraintStart_toEndOf="@+id/view8"
-                        app:layout_constraintTop_toTopOf="@+id/view9"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintBottom_toTopOf="@+id/music_txt"
+                        app:layout_constraintEnd_toEndOf="@+id/music_btn"
+                        app:layout_constraintStart_toEndOf="@+id/document_btn"
+                        app:layout_constraintTop_toTopOf="@+id/music_btn"
                         app:srcCompat="@drawable/file_music_icon" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/music_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="@string/music"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view9"
-                        app:layout_constraintEnd_toEndOf="@+id/view9"
-                        app:layout_constraintStart_toEndOf="@+id/view8"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                        android:text="@string/music"
+                        app:layout_constraintBottom_toBottomOf="@+id/music_btn"
+                        app:layout_constraintEnd_toEndOf="@+id/music_btn"
+                        app:layout_constraintStart_toEndOf="@+id/document_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/music_image" />
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/apk_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/view12"
-                        app:layout_constraintStart_toStartOf="@+id/view13"
-                        app:layout_constraintTop_toBottomOf="@+id/view6"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintBottom_toTopOf="@+id/apk_txt"
+                        app:layout_constraintEnd_toStartOf="@+id/download_btn"
+                        app:layout_constraintStart_toStartOf="@+id/apk_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/image_btn"
                         app:srcCompat="@drawable/file_apk_icon" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/apk_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
                         android:text="@string/apk"
-                        app:layout_constraintBottom_toBottomOf="@+id/view13"
-                        app:layout_constraintEnd_toStartOf="@+id/view12"
-                        app:layout_constraintStart_toStartOf="@+id/view13"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                        app:layout_constraintBottom_toBottomOf="@+id/apk_btn"
+                        app:layout_constraintEnd_toStartOf="@+id/download_btn"
+                        app:layout_constraintStart_toStartOf="@+id/apk_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/apk_img" />
 
                     <ImageView
-                        android:id="@+id/imageView10"
+                        android:id="@+id/download_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/view11"
-                        app:layout_constraintStart_toStartOf="@+id/view12"
-                        app:layout_constraintTop_toBottomOf="@+id/view7"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintBottom_toTopOf="@+id/download_txt"
+                        app:layout_constraintEnd_toStartOf="@+id/zip_btn"
+                        app:layout_constraintStart_toStartOf="@+id/download_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/video_btn"
                         app:srcCompat="@drawable/file_download_icon" />
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/download_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="@string/download"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view12"
-                        app:layout_constraintEnd_toStartOf="@+id/view11"
-                        app:layout_constraintStart_toStartOf="@+id/view12"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                        android:text="@string/download"
+                        app:layout_constraintBottom_toBottomOf="@+id/download_btn"
+                        app:layout_constraintEnd_toStartOf="@+id/zip_btn"
+                        app:layout_constraintStart_toStartOf="@+id/download_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/download_img" />
 
                     <ImageView
-                        android:id="@+id/imageView11"
+                        android:id="@+id/zip_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view11"
-                        app:layout_constraintTop_toBottomOf="@+id/view8"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintBottom_toTopOf="@+id/zip_txt"
+                        app:layout_constraintEnd_toStartOf="@+id/more_btn"
+                        app:layout_constraintStart_toStartOf="@+id/zip_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/document_btn"
                         app:srcCompat="@drawable/file_zip_icon" />
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/zip_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="Zip"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view11"
-                        app:layout_constraintEnd_toStartOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view11"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+                        android:text="Zip"
+                        app:layout_constraintBottom_toBottomOf="@+id/zip_btn"
+                        app:layout_constraintEnd_toStartOf="@+id/more_btn"
+                        app:layout_constraintStart_toStartOf="@+id/zip_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/zip_img" />
 
                     <ImageView
-                        android:id="@+id/imageView12"
+                        android:id="@+id/more_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view10"
-                        app:layout_constraintTop_toBottomOf="@+id/view9"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintBottom_toTopOf="@+id/more_txt"
+                        app:layout_constraintEnd_toEndOf="@+id/more_btn"
+                        app:layout_constraintStart_toStartOf="@+id/more_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/music_btn"
                         app:srcCompat="@drawable/more_file_icon" />
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/more_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="@string/more"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/view10"
-                        app:layout_constraintEnd_toEndOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view10"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+                        android:text="@string/more"
+                        app:layout_constraintBottom_toBottomOf="@+id/more_btn"
+                        app:layout_constraintEnd_toEndOf="@+id/more_btn"
+                        app:layout_constraintStart_toStartOf="@+id/more_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/more_img" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
