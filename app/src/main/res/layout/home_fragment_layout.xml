@@ -102,15 +102,14 @@
                     <View
                         android:id="@+id/image_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/apk_btn"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toStartOf="@+id/video_btn"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -118,13 +117,12 @@
                     <View
                         android:id="@+id/video_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/download_btn"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toStartOf="@+id/document_btn"
                         app:layout_constraintStart_toEndOf="@+id/image_btn"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -132,13 +130,12 @@
                     <View
                         android:id="@+id/document_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/zip_btn"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toStartOf="@+id/music_btn"
                         app:layout_constraintStart_toEndOf="@+id/video_btn"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -146,15 +143,14 @@
                     <View
                         android:id="@+id/music_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
                         app:layout_constraintBottom_toTopOf="@+id/more_btn"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/document_btn"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -162,14 +158,12 @@
                     <View
                         android:id="@+id/more_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/zip_btn"
                         app:layout_constraintTop_toBottomOf="@+id/music_btn" />
@@ -177,12 +171,10 @@
                     <View
                         android:id="@+id/zip_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toStartOf="@+id/more_btn"
                         app:layout_constraintStart_toEndOf="@+id/download_btn"
                         app:layout_constraintTop_toBottomOf="@+id/document_btn" />
@@ -190,9 +182,7 @@
                     <View
                         android:id="@+id/download_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-                        app:layout_constraintDimensionRatio="1:1"
+                        android:layout_height="100dp"
                         app:layout_constraintEnd_toStartOf="@+id/zip_btn"
                         app:layout_constraintStart_toEndOf="@+id/apk_btn"
                         app:layout_constraintTop_toBottomOf="@+id/video_btn" />
@@ -200,24 +190,15 @@
                     <View
                         android:id="@+id/apk_btn"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
+                        android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="?selectableItemBackground"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toStartOf="@+id/download_btn"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/image_btn" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_begin="200dp" />
 
                     <ImageView
                         android:id="@+id/img_icon"

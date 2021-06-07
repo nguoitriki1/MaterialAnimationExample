@@ -3,35 +3,93 @@ package com.example.materialanimationexample.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
+import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
+import java.util.HashSet
 
-fun Activity.requestPermission(startForResult: ActivityResultLauncher<Intent>) {
-    val hasPermission = hasPermission()
-    if (hasPermission == null && Build.VERSION.SDK_INT > 21) {
+fun Context.requestPermission(startForResult: ActivityResultLauncher<Intent>) {
+    if (hasPermission()) {
         startForResult.launch(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE))
-    }
-    if (hasPermission == true) {
-
     } else {
 
     }
 }
 
-fun Activity.hasPermission(): Boolean? {
+fun Context.getUriFromAction(startForResult: ActivityResultLauncher<Intent>){
+    startForResult.launch(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE))
+}
+
+fun Context.hasPermission(): Boolean {
     val highApiAndroid = isHighApiAndroid()
-    if (highApiAndroid == null) {
-        return null
+    if (highApiAndroid) {
+        return true
     } else {
-        if (highApiAndroid) {
-            return true
-        } else {
-            return true
-        }
+        return true
     }
 }
 
-fun isHighApiAndroid(): Boolean? {
-    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) return null
-    return Build.VERSION.SDK_INT > Build.VERSION_CODES.Q
+fun isHighApiAndroid(): Boolean {
+    return Build.VERSION.SDK_INT > Build.VERSION_CODES.P
+}
+
+object PreferencesHelper {
+
+    private const val SHARED_PREFERENCES_NAME = "file_manager"
+
+    private lateinit var sharedPreferences: SharedPreferences
+
+    fun start(appContext: Context) {
+        sharedPreferences =
+            appContext.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+    }
+
+    fun putInt(key: String, value: Int) {
+        sharedPreferences.edit().putInt(key, value).apply()
+    }
+
+    fun putLong(key: String, value: Long) {
+        sharedPreferences.edit().putLong(key, value).apply()
+    }
+
+    fun putFloat(key: String, value: Float) {
+        sharedPreferences.edit().putFloat(key, value).apply()
+    }
+
+    fun putString(key: String, value: String) {
+        sharedPreferences.edit().putString(key, value).apply()
+    }
+
+    fun putBoolean(key: String, value: Boolean) {
+        sharedPreferences.edit().putBoolean(key, value).apply()
+    }
+
+    fun getInt(key: String, defaultValue: Int): Int {
+        return sharedPreferences.getInt(key, defaultValue)
+    }
+
+    fun getLong(key: String, defaultValue: Long): Long {
+        return sharedPreferences.getLong(key, defaultValue)
+    }
+
+    fun getFloat(key: String, defaultValue: Float): Float {
+        return sharedPreferences.getFloat(key, defaultValue)
+    }
+
+    fun getString(key: String, defaultValue: String): String {
+        return sharedPreferences.getString(key, defaultValue).toString()
+    }
+
+    fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+        return sharedPreferences.getBoolean(key, defaultValue)
+    }
+
+    fun getStringSet(key: String): Set<String> {
+        return sharedPreferences.getStringSet(key, HashSet())!!
+    }
+
+    fun putStringSet(key: String, value: Set<String>) {
+        sharedPreferences.edit().putStringSet(key, value).apply()
+    }
 }

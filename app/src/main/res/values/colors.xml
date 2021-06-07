@@ -12,4 +12,5 @@
     <color name="colorBlueText">#0073FF</color>
     <color name="white20">#33FFFFFF</color>
     <color name="black10">#1A000000</color>
+    <color name="light_gray">#F6F6F6</color>
 </resources>

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navGraphViewModels
 import com.example.materialanimationexample.databinding.ActivityMainBinding
+import com.example.materialanimationexample.utils.PreferencesHelper
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         mainViewModel.isEnableDrawer().observe(this,obIsEnableDrawer)
         mainViewModel.isOpenDrawer().observe(this,obIsOpenDrawer)
+        PreferencesHelper.start(this)
     }
 
 }

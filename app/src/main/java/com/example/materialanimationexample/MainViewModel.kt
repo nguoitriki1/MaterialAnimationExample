@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 class MainViewModel : ViewModel() {
     private var _isEnableDrawerLayout = MutableLiveData<Boolean>(false)
     private var _isOpenDrawerLayout = MutableLiveData<Boolean>(false)
-    private var _uriStorage: MutableLiveData<Uri?> = MutableLiveData<Uri?>()
-    val uriStorage: LiveData<Uri?> get() = _uriStorage
 
     fun setEnableDrawerLayout(isEnable: Boolean) {
         _isEnableDrawerLayout.value = isEnable
@@ -26,9 +24,4 @@ class MainViewModel : ViewModel() {
     fun isOpenDrawer(): LiveData<Boolean> {
         return _isOpenDrawerLayout
     }
-
-    fun setUriStorage(uri: Uri?) {
-        _uriStorage.value = uri
-    }
-
 }
