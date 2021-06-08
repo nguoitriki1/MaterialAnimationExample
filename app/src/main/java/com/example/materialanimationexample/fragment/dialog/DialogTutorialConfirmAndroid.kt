@@ -1,4 +1,4 @@
-package com.example.materialanimationexample.fragment.home
+package com.example.materialanimationexample.fragment.dialog
 
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +13,11 @@ class DialogTutorialConfirmAndroid() : DialogFragment() {
     private var _binding : DialogTutorialLayoutBinding? = null
     val binding get() = _binding!!
     var callBack : onClickConfirmTutorial? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +41,7 @@ class DialogTutorialConfirmAndroid() : DialogFragment() {
         }
 
         binding.confirmBtn.setOnClickListener {
+            dismiss()
             callBack?.onConfirm()
         }
     }

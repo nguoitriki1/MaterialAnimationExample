@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.materialanimationexample.MainViewModel
 import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.HomeFragmentLayoutBinding
+import com.example.materialanimationexample.fragment.document.DocumentFragmentArgs
 import com.example.materialanimationexample.fragment.home.DialogTutorialConfirmAndroid
 import com.example.materialanimationexample.fragment.home.HomeFragmentViewModel
 import com.example.materialanimationexample.fragment.home.onClickConfirmTutorial
@@ -34,7 +35,8 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial {
     private val mainViewModel: MainViewModel by activityViewModels()
 
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (Build.VERSION.SDK_INT > 28) {
                 val data = result.data ?: return@registerForActivityResult
                 val uri = data.data ?: return@registerForActivityResult
@@ -42,6 +44,8 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial {
                     uri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
+                val actionHomeFragmentToDocumentFragment = HomeFragmentDirections.actionHomeFragmentToDocumentFragment(uri.toString())
+                findNavController().navigate(actionHomeFragmentToDocumentFragment)
             }
         }
 
@@ -158,7 +162,10 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial {
     private fun openScreenDocument() {
         val dialogTutorialConfirmAndroid = DialogTutorialConfirmAndroid()
         dialogTutorialConfirmAndroid.setListener(this)
-        dialogTutorialConfirmAndroid.show(childFragmentManager,DialogTutorialConfirmAndroid::class.java.name)
+        dialogTutorialConfirmAndroid.show(
+            childFragmentManager,
+            DialogTutorialConfirmAndroid::class.java.name
+        )
     }
 
     private fun openScreenImage() {
@@ -177,17 +184,16 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial {
     }
 
     override fun onConfirm() {
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q){
-            val intent =  Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-            startForResult.launch(intent)
-        }else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
-            val intent =  Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//            val intent =  Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+//            startForResult.launch(intent)
+//        }else
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 type = "application/pdf"
             }
             startForResult.launch(intent)
-        }else{
-
         }
     }
 

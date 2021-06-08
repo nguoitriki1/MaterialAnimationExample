@@ -1,0 +1,47 @@
+package com.example.materialanimationexample.fragment.dialog
+
+import android.os.Build
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import com.example.materialanimationexample.R
+import com.example.materialanimationexample.databinding.DialogTutorialLayoutBinding
+
+class DialogDetailDocumentFile() : DialogFragment() {
+    private var _binding : DialogTutorialLayoutBinding? = null
+    val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = DialogTutorialLayoutBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q){
+            binding.titleTxt.text = getString(R.string.storage_android10)
+        }else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
+            binding.titleTxt.text = getString(R.string.storage_android11)
+        }
+
+        binding.confirmBtn.setOnClickListener {
+            dismiss()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

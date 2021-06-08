@@ -2,16 +2,18 @@ package com.example.materialanimationexample.fragment.image
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.ItemStorageLayoutBinding
+import com.example.materialanimationexample.fragment.DialogActionItem
 import com.example.materialanimationexample.utils.actionViewFile
 import com.example.materialanimationexample.utils.loadUri
 
-class AdapterImage : ListAdapter<DocumentFile, RecyclerView.ViewHolder>(ImageItemDiffUtil()) {
+class AdapterImage(val onLongClickItemImage : onLongClickItemImage) : ListAdapter<DocumentFile, RecyclerView.ViewHolder>(ImageItemDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ImageItemViewHolder(ItemStorageLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -30,8 +32,18 @@ class AdapterImage : ListAdapter<DocumentFile, RecyclerView.ViewHolder>(ImageIte
                     viewBinding.root.context.actionViewFile(documentFile.uri,documentType)
                 }
             }
+            viewBinding.root.setOnLongClickListener {
+                if (!documentFile.isDirectory){
+                    onLongClickItemImage.onLongClickImage(documentFile)
+                }
+                return@setOnLongClickListener false
+            }
         }
     }
+}
+
+interface onLongClickItemImage{
+    fun onLongClickImage(documentFile: DocumentFile)
 }
 
 

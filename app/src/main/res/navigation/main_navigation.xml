@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeFragment_to_imageFragment"
             app:destination="@id/imageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_documentFragment"
+            app:destination="@id/documentFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -47,4 +50,13 @@
         android:id="@+id/imageFragment"
         android:name="com.example.materialanimationexample.fragment.image.ImageFragment"
         android:label="ImageFragment" />
+    <fragment
+        android:id="@+id/documentFragment"
+        android:name="com.example.materialanimationexample.fragment.document.DocumentFragment"
+        android:label="DocumentFragment" >
+        <argument
+            android:name="uri"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
