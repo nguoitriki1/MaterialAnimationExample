@@ -1,13 +1,36 @@
 package com.example.materialanimationexample.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.documentfile.provider.DocumentFile
+import com.bumptech.glide.Glide
+import com.example.materialanimationexample.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.HashSet
+
+fun ImageView.loadUri(uri: Uri?) {
+    if (uri != null) {
+        Glide.with(context)
+            .load(uri)
+            .placeholder(R.color.white)
+            .into(this)
+    }
+}
+
+fun Context.actionViewFile(uri: Uri, mineType: String) {
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+    intent.setDataAndType(uri, mineType)
+    startActivity(Intent.createChooser(intent, "view action"))
+}
 
 fun Context.requestPermission(startForResult: ActivityResultLauncher<Intent>) {
     if (hasPermission()) {
@@ -17,8 +40,85 @@ fun Context.requestPermission(startForResult: ActivityResultLauncher<Intent>) {
     }
 }
 
-fun Context.getUriFromAction(startForResult: ActivityResultLauncher<Intent>){
+fun Context.getUriFromAction(startForResult: ActivityResultLauncher<Intent>) {
     startForResult.launch(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE))
+}
+
+suspend fun Context.queryFileImage() : List<DocumentFile> {
+   return withContext(Dispatchers.Default){
+        val volumeName: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val externalVolumeNames = MediaStore.getExternalVolumeNames(this@queryFileImage)
+
+            externalVolumeNames.toList()[0]
+        } else {
+            "external"
+        }
+        val uriExternal = MediaStore.Images.Media.getContentUri(volumeName)
+        val projection: Array<String> = arrayOf(
+            MediaStore.Images.ImageColumns._ID,
+            MediaStore.Images.ImageColumns.DISPLAY_NAME
+        )
+        val listImage = ArrayList<DocumentFile>()
+
+        contentResolver.query(
+            uriExternal,
+            projection,
+            null,
+            null,
+            null
+        )?.use { cursor ->
+            val columnID = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns._ID)
+            val columTitle = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DISPLAY_NAME)
+            if (cursor.moveToFirst()) {
+                do {
+                    val displayname = cursor.getString(columTitle)
+                    val itemId = cursor.getInt(columnID)
+                    Log.d("abc", "$displayname")
+                    val uri = uriExternal.buildUpon().appendPath(itemId.toString()).build()
+                    val fromSingleUri = DocumentFile.fromSingleUri(this@queryFileImage, uri) ?: continue
+                    listImage.add(fromSingleUri)
+                } while (cursor.moveToNext())
+            }
+        }
+        return@withContext listImage
+    }
+}
+
+fun Context.queryFileInStore() {
+    val volumeName: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val externalVolumeNames = MediaStore.getExternalVolumeNames(this)
+
+        externalVolumeNames.toList()[0]
+    } else {
+        "external"
+    }
+    val uriExternal = MediaStore.Files.getContentUri("external")
+    val projection: Array<String> = arrayOf(
+        MediaStore.Files.FileColumns._ID,
+        MediaStore.Files.FileColumns.DISPLAY_NAME,
+        MediaStore.Files.FileColumns.MIME_TYPE
+    )
+
+    contentResolver.query(
+        uriExternal,
+        projection,
+        null,
+        null,
+        null
+    )?.use { cursor ->
+        val columnID = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+        val columTitle = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
+        val columMine = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.MIME_TYPE)
+        if (cursor.moveToFirst()) {
+            do {
+                val titleValue = cursor.getString(columTitle)
+                val audioId = cursor.getInt(columnID)
+                val mineId = cursor.getString(columMine)
+                Log.d("abc", "$mineId")
+
+            } while (cursor.moveToNext())
+        }
+    }
 }
 
 fun Context.hasPermission(): Boolean {

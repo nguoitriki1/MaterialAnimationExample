@@ -1,11 +1,16 @@
 package com.example.materialanimationexample.fragment.storage
 
+import android.R.attr.path
 import android.app.Application
-import android.content.Context
+import android.content.Intent
 import android.net.Uri
+import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.*
-import com.example.materialanimationexample.utils.PreferencesHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class StorageHighViewModelFactory(
@@ -21,28 +26,46 @@ class StorageHighViewModelFactory(
 
 
 class StorageHighViewModel(val context: Application) : ViewModel() {
-    private var _uriStorage: MutableLiveData<Uri?> = MutableLiveData<Uri?>()
-    val listData: LiveData<List<DocumentFile>>
-        get() = _uriStorage.map {
-            val uri = it ?: return@map emptyList<DocumentFile>()
-            val newList: MutableList<DocumentFile> = ArrayList()
-            val fromTreeUri = DocumentFile.fromTreeUri(context, uri) ?: return@map newList
-            if (fromTreeUri.canWrite()){
-                if (fromTreeUri.isDirectory){
-                    val listFiles = fromTreeUri.listFiles()
-                    listFiles.forEach {
-                        newList.add(it)
-                    }
-                }else{
-                    newList.add(fromTreeUri)
-                }
-            }
-            newList
-        }
+    private var _uriStorage: Uri? = null
+    private val _listData: MutableLiveData<List<DocumentFile>> = MutableLiveData()
+    val listData: LiveData<List<DocumentFile>> get() = _listData
 
     fun setUriStorage(uri: Uri?) {
-        _uriStorage.value = uri
-        PreferencesHelper.putString("sting",uri.toString())
+        viewModelScope.launch {
+            _uriStorage = uri ?: return@launch
+            val newList: MutableList<DocumentFile> = ArrayList()
+            withContext(Dispatchers.Default){
+                val fromTreeUri = DocumentFile.fromTreeUri(context, uri) ?: return@withContext
+                if (fromTreeUri.canWrite()){
+                    if (fromTreeUri.isDirectory){
+                        val listFiles = fromTreeUri.listFiles()
+                        listFiles.forEach {
+                            newList.add(it)
+                        }
+                    }else{
+                        newList.add(fromTreeUri)
+                    }
+                }
+            }
+            _listData.value = newList
+        }
+    }
+
+    fun openFile(documentFile: DocumentFile){
+        val newList: MutableList<DocumentFile> = ArrayList()
+        if (documentFile.canWrite()){
+            if (documentFile.isDirectory){
+                val listFiles = documentFile.listFiles()
+                listFiles.forEach {
+                    newList.add(it)
+                }
+                _listData.value = newList
+            }else{
+                Log.d("abc","open file")
+            }
+        }else{
+            Log.d("abc","uri expired")
+        }
     }
 
 

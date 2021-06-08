@@ -64,6 +64,9 @@ class StorageHighFragment : Fragment() {
         binding.choiceFolderBtn.setOnClickListener {
             requireContext().getUriFromAction(startForResult)
         }
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun setupRecyclerView() = with(binding.rvStorage) {
@@ -86,5 +89,10 @@ class StorageHighFragment : Fragment() {
                 requireActivity().requestPermission(startForResult)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

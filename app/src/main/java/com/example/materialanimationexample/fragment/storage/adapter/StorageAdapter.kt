@@ -1,8 +1,8 @@
 package com.example.materialanimationexample.fragment.storage.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -29,7 +29,15 @@ class StorageAdapter(val viewModel: StorageHighViewModel) : ListAdapter<Document
             }
             viewBinding.nameTxt.text = documentFile.name
             viewBinding.root.setOnClickListener {
-                viewModel.setUriStorage(documentFile.uri)
+                if (documentFile.isDirectory){
+                    viewModel.openFile(documentFile)
+                }else{
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    val data = documentFile.uri
+                    intent.setDataAndType(data, documentFile.type)
+                    viewBinding.root.context.startActivity(Intent.createChooser(intent, "view action"))
+                }
             }
         }
     }

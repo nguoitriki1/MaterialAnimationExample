@@ -17,4 +17,6 @@
     <string name="download">Download</string>
     <string name="apk">Apk</string>
     <string name="more">More</string>
+    <string name="storage_android10">Follow scope storage on android 10. You need to select your device\'s storage to get access</string>
+    <string name="storage_android11">Follow scope storage on android 11. Select the file you want to use the action</string>
 </resources>
