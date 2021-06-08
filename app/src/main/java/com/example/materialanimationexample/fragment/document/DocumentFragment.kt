@@ -12,8 +12,8 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.materialanimationexample.databinding.DocumentScreenLayoutBinding
-import com.example.materialanimationexample.fragment.DialogActionItem
-import com.example.materialanimationexample.fragment.OnActionItemListener
+import com.example.materialanimationexample.fragment.dialog.DialogActionItem
+import com.example.materialanimationexample.fragment.dialog.OnActionItemListener
 
 class DocumentFragment : Fragment(), OnActionItemListener {
 

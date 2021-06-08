@@ -1,16 +1,22 @@
 package com.example.materialanimationexample.fragment.dialog
 
-import android.os.Build
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.DialogFragment
-import com.example.materialanimationexample.R
-import com.example.materialanimationexample.databinding.DialogTutorialLayoutBinding
+import androidx.navigation.fragment.navArgs
+import com.example.materialanimationexample.databinding.DetailFileLayoutBinding
+import com.example.materialanimationexample.utils.convertFileSize
+import java.io.File
+import java.text.SimpleDateFormat
 
 class DialogDetailDocumentFile() : DialogFragment() {
-    private var _binding : DialogTutorialLayoutBinding? = null
+    private val navArgs : DialogDetailDocumentFileArgs by navArgs()
+    private var _binding : DetailFileLayoutBinding? = null
+    private var documentItem : DocumentFile? = null
     val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,19 +29,27 @@ class DialogDetailDocumentFile() : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogTutorialLayoutBinding.inflate(inflater)
+        _binding = DetailFileLayoutBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q){
-            binding.titleTxt.text = getString(R.string.storage_android10)
-        }else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
-            binding.titleTxt.text = getString(R.string.storage_android11)
-        }
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
 
-        binding.confirmBtn.setOnClickListener {
+
+        val uri = navArgs.uri
+        documentItem = DocumentFile.fromSingleUri(requireContext(), Uri.parse(uri))
+        documentItem?.let {
+            binding.filenameDes.text = it.name
+            val name = it.parentFile?.name ?: ""
+            if (name.isNotEmpty()){
+                binding.pathDes.text = "${name}${File.separator}${it.name}"
+            }
+            binding.sizeDes.text = convertFileSize(it.length())
+            binding.modifileDes.text = sdf.format( it.lastModified())
+        }
+        binding.okBtn.setOnClickListener {
             dismiss()
         }
     }

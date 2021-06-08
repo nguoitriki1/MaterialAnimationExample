@@ -49,7 +49,11 @@
     <fragment
         android:id="@+id/imageFragment"
         android:name="com.example.materialanimationexample.fragment.image.ImageFragment"
-        android:label="ImageFragment" />
+        android:label="ImageFragment" >
+        <action
+            android:id="@+id/action_imageFragment_to_dialogDetailDocumentFile"
+            app:destination="@id/dialogDetailDocumentFile" />
+    </fragment>
     <fragment
         android:id="@+id/documentFragment"
         android:name="com.example.materialanimationexample.fragment.document.DocumentFragment"
@@ -59,4 +63,12 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <dialog
+        android:id="@+id/dialogDetailDocumentFile"
+        android:name="com.example.materialanimationexample.fragment.dialog.DialogDetailDocumentFile"
+        android:label="DialogDetailDocumentFile" >
+        <argument
+            android:name="uri"
+            app:argType="string" />
+    </dialog>
 </navigation>

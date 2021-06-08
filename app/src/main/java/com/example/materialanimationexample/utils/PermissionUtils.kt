@@ -14,7 +14,13 @@ import com.bumptech.glide.Glide
 import com.example.materialanimationexample.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.HashSet
+import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.List
+import kotlin.collections.Set
+import kotlin.collections.toList
+import kotlin.math.abs
 
 fun ImageView.loadUri(uri: Uri?) {
     if (uri != null) {
@@ -22,6 +28,29 @@ fun ImageView.loadUri(uri: Uri?) {
             .load(uri)
             .placeholder(R.color.white)
             .into(this)
+    }
+}
+
+fun convertFileSize(size: Long): String {
+    var size1 = size
+    size1 = abs(size1)
+    val m = size1 / 1024.0
+    val g = size1 / 1048576.0
+    val t = size1 / 1073741824.0
+    val dec = DecimalFormat("0.00")
+    return when {
+        t > 1 -> {
+            dec.format(t) + " GB"
+        }
+        g > 1 -> {
+            dec.format(g) + " MB"
+        }
+        m > 1 -> {
+            dec.format(m) + " KB"
+        }
+        else -> {
+            dec.format(size1) + " B"
+        }
     }
 }
 
@@ -56,7 +85,8 @@ suspend fun Context.queryFileImage() : List<DocumentFile> {
         val uriExternal = MediaStore.Images.Media.getContentUri(volumeName)
         val projection: Array<String> = arrayOf(
             MediaStore.Images.ImageColumns._ID,
-            MediaStore.Images.ImageColumns.DISPLAY_NAME
+            MediaStore.Images.ImageColumns.DISPLAY_NAME,
+            MediaStore.Images.ImageColumns.RELATIVE_PATH
         )
         val listImage = ArrayList<DocumentFile>()
 
@@ -69,11 +99,13 @@ suspend fun Context.queryFileImage() : List<DocumentFile> {
         )?.use { cursor ->
             val columnID = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns._ID)
             val columTitle = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DISPLAY_NAME)
+            val columPath = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.RELATIVE_PATH)
             if (cursor.moveToFirst()) {
                 do {
                     val displayname = cursor.getString(columTitle)
                     val itemId = cursor.getInt(columnID)
-                    Log.d("abc", "$displayname")
+                    val itemPath = cursor.getInt(columPath)
+                    Log.d("abc", "$itemPath")
                     val uri = uriExternal.buildUpon().appendPath(itemId.toString()).build()
                     val fromSingleUri = DocumentFile.fromSingleUri(this@queryFileImage, uri) ?: continue
                     listImage.add(fromSingleUri)

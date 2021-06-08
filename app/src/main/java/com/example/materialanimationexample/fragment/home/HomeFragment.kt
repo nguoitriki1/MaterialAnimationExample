@@ -18,17 +18,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.materialanimationexample.MainViewModel
 import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.HomeFragmentLayoutBinding
-import com.example.materialanimationexample.fragment.document.DocumentFragmentArgs
-import com.example.materialanimationexample.fragment.home.DialogTutorialConfirmAndroid
+import com.example.materialanimationexample.fragment.dialog.DialogTutorialConfirmAndroid
+import com.example.materialanimationexample.fragment.dialog.onClickConfirmTutorial
 import com.example.materialanimationexample.fragment.home.HomeFragmentViewModel
-import com.example.materialanimationexample.fragment.home.onClickConfirmTutorial
-import com.example.materialanimationexample.fragment.storage.StorageHighViewModelFactory
-import com.example.materialanimationexample.utils.PreferencesHelper
-import com.example.materialanimationexample.utils.queryFileInStore
-import com.example.materialanimationexample.utils.requestPermission
 
 
-class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial {
+class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
     private var _binding: HomeFragmentLayoutBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
