@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/setting_btn"
                 android:layout_width="@dimen/actionbar_size"
                 android:layout_height="@dimen/actionbar_size"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/menu_ic" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/search_btn"
                 android:layout_width="@dimen/actionbar_size"
                 android:layout_height="@dimen/actionbar_size"
@@ -40,7 +40,7 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/search_icon" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/clean_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/actionbar_size"
@@ -51,7 +51,7 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/clean_menu_selector" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/storage_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/actionbar_size"
@@ -62,7 +62,7 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/folder_menu_selector" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/history_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/actionbar_size"
@@ -200,7 +200,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/image_btn" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -225,7 +225,7 @@
                         app:layout_constraintStart_toStartOf="@+id/image_btn"
                         app:layout_constraintTop_toBottomOf="@+id/img_icon" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/video_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -238,7 +238,7 @@
                         app:layout_constraintVertical_chainStyle="packed"
                         app:srcCompat="@drawable/file_video_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/video_txt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
                         app:layout_constraintStart_toEndOf="@+id/image_btn"
                         app:layout_constraintTop_toBottomOf="@+id/video_img" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/document_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -262,7 +262,7 @@
                         app:layout_constraintVertical_chainStyle="packed"
                         app:srcCompat="@drawable/file_document_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/document_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -276,7 +276,7 @@
                         app:layout_constraintStart_toEndOf="@+id/video_btn"
                         app:layout_constraintTop_toBottomOf="@+id/document_img" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/music_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -288,7 +288,7 @@
                         app:layout_constraintTop_toTopOf="@+id/music_btn"
                         app:srcCompat="@drawable/file_music_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/music_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -300,7 +300,7 @@
                         app:layout_constraintStart_toEndOf="@+id/document_btn"
                         app:layout_constraintTop_toBottomOf="@+id/music_image" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/apk_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -312,7 +312,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/image_btn"
                         app:srcCompat="@drawable/file_apk_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/apk_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -324,7 +324,7 @@
                         app:layout_constraintStart_toStartOf="@+id/apk_btn"
                         app:layout_constraintTop_toBottomOf="@+id/apk_img" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/download_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -336,7 +336,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/video_btn"
                         app:srcCompat="@drawable/file_download_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/download_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -348,7 +348,7 @@
                         app:layout_constraintStart_toStartOf="@+id/download_btn"
                         app:layout_constraintTop_toBottomOf="@+id/download_img" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/zip_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -360,7 +360,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/document_btn"
                         app:srcCompat="@drawable/file_zip_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/zip_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -372,7 +372,7 @@
                         app:layout_constraintStart_toStartOf="@+id/zip_btn"
                         app:layout_constraintTop_toBottomOf="@+id/zip_img" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/more_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -384,7 +384,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/music_btn"
                         app:srcCompat="@drawable/more_file_icon" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/more_txt"
                         android:layout_width="0dp"
                         android:layout_height="0dp"

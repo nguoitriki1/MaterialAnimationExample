@@ -5,15 +5,21 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.materialanimationexample.BuildConfig
 import com.example.materialanimationexample.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -22,11 +28,37 @@ import kotlin.collections.Set
 import kotlin.collections.toList
 import kotlin.math.abs
 
-fun ImageView.loadUri(uri: Uri?) {
+const val PRIVATE_DATA_URI = "primary%3A/document/primary%3AAndroid%2Fdata"
+const val PRIVATE_DATA_URI2 = "0/Android/data/"
+fun Context.isAccessFileLimited() : Boolean{
+    try {
+        val fileStorage = Environment.getExternalStorageDirectory() ?: return true
+        return !DocumentFile.fromFile(fileStorage).canWrite()
+    }catch (e : Exception){
+        return true
+    }
+}
+
+fun Context.isPublicFolder(file: File) : Boolean{
+    try {
+        val fromSingleUri = DocumentFile.fromFile(file) ?: return false
+         if (fromSingleUri.isDirectory){
+             val uri = fromSingleUri.uri.toString()
+             return !(uri.contains(PRIVATE_DATA_URI) && uri.contains(PRIVATE_DATA_URI2))
+        }else{
+           return false
+        }
+    }catch (e : Exception){
+        return false
+    }
+}
+
+fun ImageView.loadUri(uri: Uri?,request : RequestOptions) {
     if (uri != null) {
         Glide.with(context)
             .load(uri)
             .placeholder(R.color.white)
+            .apply(request)
             .into(this)
     }
 }
@@ -84,9 +116,7 @@ suspend fun Context.queryFileImage() : List<DocumentFile> {
         }
         val uriExternal = MediaStore.Images.Media.getContentUri(volumeName)
         val projection: Array<String> = arrayOf(
-            MediaStore.Images.ImageColumns._ID,
-            MediaStore.Images.ImageColumns.DISPLAY_NAME,
-            MediaStore.Images.ImageColumns.RELATIVE_PATH
+            MediaStore.Images.ImageColumns._ID
         )
         val listImage = ArrayList<DocumentFile>()
 
@@ -98,14 +128,9 @@ suspend fun Context.queryFileImage() : List<DocumentFile> {
             null
         )?.use { cursor ->
             val columnID = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns._ID)
-            val columTitle = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DISPLAY_NAME)
-            val columPath = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.RELATIVE_PATH)
             if (cursor.moveToFirst()) {
                 do {
-                    val displayname = cursor.getString(columTitle)
                     val itemId = cursor.getInt(columnID)
-                    val itemPath = cursor.getInt(columPath)
-                    Log.d("abc", "$itemPath")
                     val uri = uriExternal.buildUpon().appendPath(itemId.toString()).build()
                     val fromSingleUri = DocumentFile.fromSingleUri(this@queryFileImage, uri) ?: continue
                     listImage.add(fromSingleUri)
@@ -146,7 +171,7 @@ fun Context.queryFileInStore() {
                 val titleValue = cursor.getString(columTitle)
                 val audioId = cursor.getInt(columnID)
                 val mineId = cursor.getString(columMine)
-                Log.d("abc", "$mineId")
+                Log.d("abc", "$titleValue")
 
             } while (cursor.moveToNext())
         }

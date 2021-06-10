@@ -7,12 +7,14 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.example.materialanimationexample.R
 import com.example.materialanimationexample.databinding.ItemStorageLayoutBinding
 import com.example.materialanimationexample.utils.actionViewFile
 import com.example.materialanimationexample.utils.loadUri
 
 class AdapterImage(val onLongClickItemImage : onLongClickItemImage) : ListAdapter<DocumentFile, RecyclerView.ViewHolder>(ImageItemDiffUtil()) {
+    val requestOptions = RequestOptions().centerCrop()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ImageItemViewHolder(ItemStorageLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -23,7 +25,7 @@ class AdapterImage(val onLongClickItemImage : onLongClickItemImage) : ListAdapte
     inner class ImageItemViewHolder(private val viewBinding: ItemStorageLayoutBinding) : RecyclerView.ViewHolder(viewBinding.root){
 
         fun bind(documentFile : DocumentFile){
-            viewBinding.iconItem.loadUri(documentFile.uri)
+            viewBinding.iconItem.loadUri(documentFile.uri,requestOptions)
             viewBinding.nameTxt.text = documentFile.name
             viewBinding.root.setOnClickListener {
                 if (!documentFile.isDirectory){

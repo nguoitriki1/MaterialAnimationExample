@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navGraphViewModels
 import com.example.materialanimationexample.databinding.ActivityMainBinding
+import com.example.materialanimationexample.utils.DELETE_ACTION_CODE
 import com.example.materialanimationexample.utils.PreferencesHelper
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +44,15 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.isEnableDrawer().observe(this,obIsEnableDrawer)
         mainViewModel.isOpenDrawer().observe(this,obIsOpenDrawer)
         PreferencesHelper.start(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == DELETE_ACTION_CODE){
+            if (requestCode == Activity.RESULT_OK){
+                mainViewModel.refeshListImage()
+            }
+        }
     }
 
 }

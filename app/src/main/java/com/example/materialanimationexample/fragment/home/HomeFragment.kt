@@ -1,10 +1,14 @@
 package com.example.materialanimationexample.fragment
 
+import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,9 +25,11 @@ import com.example.materialanimationexample.databinding.HomeFragmentLayoutBindin
 import com.example.materialanimationexample.fragment.dialog.DialogTutorialConfirmAndroid
 import com.example.materialanimationexample.fragment.dialog.onClickConfirmTutorial
 import com.example.materialanimationexample.fragment.home.HomeFragmentViewModel
+import com.example.materialanimationexample.utils.*
 
 
-class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
+class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial,
+    RequestPermissionHandler.RequestPermissionListener {
     private var _binding: HomeFragmentLayoutBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
@@ -39,7 +45,8 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
                     uri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
-                val actionHomeFragmentToDocumentFragment = HomeFragmentDirections.actionHomeFragmentToDocumentFragment(uri.toString())
+                val actionHomeFragmentToDocumentFragment =
+                    HomeFragmentDirections.actionHomeFragmentToDocumentFragment(uri.toString())
                 findNavController().navigate(actionHomeFragmentToDocumentFragment)
             }
         }
@@ -57,6 +64,21 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
         mainViewModel.setEnableDrawerLayout(true)
         setOnClickView()
         activeBtn(binding.historyBtn)
+        requestPermission()
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            RequestPermissionHandler().requestPermission(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                101,
+                this
+            )
+        }
     }
 
     private fun setOnClickView() = with(binding) {
@@ -73,7 +95,7 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
         downloadBtn.setOnClickListener(this@HomeFragment)
         zipBtn.setOnClickListener(this@HomeFragment)
         moreBtn.setOnClickListener(this@HomeFragment)
-//        requireContext().queryFileInStore()
+        requireContext().queryFileInStore()
     }
 
     override fun onDestroyView() {
@@ -155,12 +177,16 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
     }
 
     private fun openScreenDocument() {
-        val dialogTutorialConfirmAndroid = DialogTutorialConfirmAndroid()
-        dialogTutorialConfirmAndroid.setListener(this)
-        dialogTutorialConfirmAndroid.show(
-            childFragmentManager,
-            DialogTutorialConfirmAndroid::class.java.name
-        )
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
+            val dialogTutorialConfirmAndroid = DialogTutorialConfirmAndroid()
+            dialogTutorialConfirmAndroid.setListener(this)
+            dialogTutorialConfirmAndroid.show(
+                childFragmentManager,
+                DialogTutorialConfirmAndroid::class.java.name
+            )
+        }else{
+
+        }
     }
 
     private fun openScreenImage() {
@@ -190,6 +216,14 @@ class HomeFragment : Fragment(), View.OnClickListener, onClickConfirmTutorial{
             }
             startForResult.launch(intent)
         }
+    }
+
+    override fun onSuccess() {
+
+    }
+
+    override fun onFailed() {
+
     }
 
 }
